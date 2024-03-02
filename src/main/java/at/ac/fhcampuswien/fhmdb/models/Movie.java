@@ -2,13 +2,9 @@ package at.ac.fhcampuswien.fhmdb.models;
 
 import java.util.*;
 import at.ac.fhcampuswien.fhmdb.Genre;
-import at.ac.fhcampuswien.fhmdb.Genre;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Movie {
+    private List<Genre> genres;
     private String title;
     private String description;
     // TODO add more properties here
