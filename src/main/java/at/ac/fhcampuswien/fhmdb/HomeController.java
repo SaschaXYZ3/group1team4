@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -49,7 +51,7 @@ public class HomeController implements Initializable {
         //genreComboBox.setItems(FXCollections.observableArrayList(Genre.values()));
         //movieListView.setItems(Movie.filteredListByGenre(observableMovies,genreComboBox.getValue());
         genreComboBox.setOnAction(event -> {
-            movieListView.setItems((ObservableList) Movie.filteredListByGenre(observableMovies, (Genre) genreComboBox.getValue()));
+            movieListView.setItems((ObservableList) filteredListByGenre(observableMovies, (Genre) genreComboBox.getValue()));
 
         });
 
@@ -69,5 +71,18 @@ public class HomeController implements Initializable {
         });
 
 
+    }
+    public static List<Movie> filteredListByString(List<Movie> movies, String searchWord){
+
+        List<Movie> filteredMovies = movies.stream().filter(a -> Objects.equals(a.getTitle(), searchWord)).collect(Collectors.toList());
+
+        return  filteredMovies;
+    }
+
+    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
+
+        List<Movie> MoviesGenres = movies.stream().filter(a -> Objects.equals(a.getGenres(), genre)).collect(Collectors.toList());
+
+        return MoviesGenres;
     }
 }
