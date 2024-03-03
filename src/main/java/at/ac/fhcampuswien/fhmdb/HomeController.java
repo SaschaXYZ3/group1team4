@@ -45,6 +45,7 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.setItems(FXCollections.observableArrayList(Genre.values()));
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here

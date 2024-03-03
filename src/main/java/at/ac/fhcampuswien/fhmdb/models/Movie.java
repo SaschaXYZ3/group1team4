@@ -1,6 +1,8 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 import at.ac.fhcampuswien.fhmdb.Genre;
 
 public class Movie {
@@ -53,6 +55,13 @@ public class Movie {
                         "govemrnent.", Arrays.asList(Genre.DRAMA,Genre.ROMANCE,Genre.BIOGRAPHY))
         );
         return movies;
+    }
+
+    public static List<Movie> filteredListByString(List<Movie> movies, String searchWord){
+
+        List<Movie> filteredMovies = movies.stream().filter(a -> Objects.equals(a.getTitle(), searchWord)).collect(Collectors.toList());
+
+        return  filteredMovies;
     }
 
 }
