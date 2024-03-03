@@ -36,7 +36,7 @@ public class HomeController implements Initializable {
 
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private static final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,11 +60,11 @@ public class HomeController implements Initializable {
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
         searchBtn.setOnAction(ActionEvent -> {
-            if (!searchField.getText().isBlank()){
-                movieListView.setItems(filteredListByString(observableMovies, searchField.toString()));
-            }
+            String txt = searchField.getText().toLowerCase();
 
-                });
+                filterMovies(allMovies, txt);
+
+        });
 
 
         // Sort button example:
@@ -97,7 +97,12 @@ public class HomeController implements Initializable {
         return MoviesGenres;
     }
 
-    public static void filterMovies(){
-
+    public static void filterMovies(List<Movie> movies, String txt){
+        observableMovies.clear();
+        for (Movie movie : movies){
+            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)){
+                observableMovies.add(movie);
+            }
+        }
     }
 }

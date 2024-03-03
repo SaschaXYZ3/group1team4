@@ -21,6 +21,9 @@ public class Movie {
     public String getDescription() {
         return description;
     }
+    public List<Genre> getgenre(){
+        return genres;
+    }
     public void setDescription(String description) {
         this.description = description;
     }
