@@ -64,4 +64,11 @@ public class Movie {
         return  filteredMovies;
     }
 
+    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
+
+        List<Movie> MoviesGenres = movies.stream().filter(a -> Objects.equals(a.getGenres(), genre)).collect(Collectors.toList());
+
+        return MoviesGenres;
+    }
+
 }
