@@ -57,18 +57,6 @@ public class Movie {
         return movies;
     }
 
-    public static List<Movie> filteredListByString(List<Movie> movies, String searchWord){
 
-        List<Movie> filteredMovies = movies.stream().filter(a -> Objects.equals(a.getTitle(), searchWord)).collect(Collectors.toList());
-
-        return  filteredMovies;
-    }
-
-    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
-
-        List<Movie> MoviesGenres = movies.stream().filter(a -> Objects.equals(a.getGenres(), genre)).collect(Collectors.toList());
-
-        return MoviesGenres;
-    }
 
 }

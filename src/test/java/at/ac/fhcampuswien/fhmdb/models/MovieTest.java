@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
 import at.ac.fhcampuswien.fhmdb.Genre;
+import at.ac.fhcampuswien.fhmdb.HomeController;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -28,7 +29,7 @@ class MovieTest {
         );
         //when
         boolean actual; //= filterdMovies.equals(Movie.filteredListByString(Movie.initializeMovies(), "Iron"));
-        actual = filterdMovies.contains(Movie.filteredListByString(Movie.initializeMovies(), "Iron"));
+        actual = filterdMovies.contains(HomeController.filteredListByString(Movie.initializeMovies(), "Iron"));
         //then
         assertTrue(actual);
     }
