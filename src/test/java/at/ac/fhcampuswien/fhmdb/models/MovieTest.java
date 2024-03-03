@@ -41,7 +41,7 @@ class MovieTest {
             ObservableList<Movie> observableMovies = FXCollections.observableArrayList(movie1, movie2, movie3, movie4);
 
             //when
-            homeController.filterMovies(observableMovies, query, genre);
+            homeController.filteredListByString(observableMovies, query);
 
             //then
             assertTrue(observableMovies.contains(movie2));
