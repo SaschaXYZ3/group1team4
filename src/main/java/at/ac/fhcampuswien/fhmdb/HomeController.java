@@ -7,14 +7,15 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
@@ -58,6 +59,13 @@ public class HomeController implements Initializable {
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
+        searchBtn.setOnAction(ActionEvent -> {
+            if (!searchField.getText().isBlank()){
+                movieListView.setItems(filteredListByString(observableMovies, searchField.toString()));
+            }
+
+                });
+
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
@@ -72,9 +80,12 @@ public class HomeController implements Initializable {
 
 
     }
-    public static List<Movie> filteredListByString(List<Movie> movies, String searchWord){
+    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord){
 
-        List<Movie> filteredMovies = movies.stream().filter(a -> Objects.equals(a.getTitle(), searchWord)).collect(Collectors.toList());
+        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream()
+                .filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase()))
+                .filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))
+                .collect(Collectors.toList()));
 
         return  filteredMovies;
     }
