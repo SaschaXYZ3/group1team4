@@ -85,4 +85,8 @@ public class HomeController implements Initializable {
 
         return MoviesGenres;
     }
+
+    public static void filterMovies(){
+
+    }
 }
