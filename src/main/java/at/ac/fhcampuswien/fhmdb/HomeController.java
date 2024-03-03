@@ -61,10 +61,9 @@ public class HomeController implements Initializable {
         // either set event handlers in the fxml file (onAction) or add them here
         searchBtn.setOnAction(ActionEvent -> {
             if (!searchField.getText().isBlank()){
-                movieListView.setItems(filteredListByString(observableMovies, searchField.toString()));
+                movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
             }
-
-                });
+        });
 
 
         // Sort button example:
@@ -80,14 +79,11 @@ public class HomeController implements Initializable {
 
 
     }
-    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord){
-
-        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream()
-                .filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase()))
-                .filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))
+    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
+        return FXCollections.observableList(movies.stream()
+                .filter(sampleMovie -> sampleMovie.getTitle().toLowerCase().contains(searchWord.toLowerCase()))
+                .filter(sampleMovie -> sampleMovie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))
                 .collect(Collectors.toList()));
-
-        return  filteredMovies;
     }
 
     public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
@@ -97,7 +93,4 @@ public class HomeController implements Initializable {
         return MoviesGenres;
     }
 
-    public static void filterMovies(){
-
-    }
 }
