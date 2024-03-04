@@ -64,6 +64,7 @@ public class HomeController implements Initializable {
 
                 filterMovies(allMovies, txt);
 
+
         });
 
 
