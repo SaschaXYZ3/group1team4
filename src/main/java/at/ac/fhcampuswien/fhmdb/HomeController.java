@@ -109,26 +109,24 @@ public class HomeController implements Initializable {
         }
     }
 
+    //comparator from movie with title
     Comparator<Movie> movieComp = Comparator.comparing(Movie::getTitle);
 
     public ObservableList<Movie> sortAscending(ObservableList<Movie> movies) {
         movies.sort(movieComp);
-        doSortBtn("Sort (desc)");
+        // update sort button with text
+        if (sortBtn != null) {
+            sortBtn.setText("Sort (desc)");
+        }
         return observableMovies;
     }
 
     public ObservableList<Movie> sortDescending(ObservableList<Movie> movies) {
         movies.sort(movieComp.reversed());
-        doSortBtn("Sort (asc)");
+        // update sort button with text
+        if (sortBtn != null) {
+            sortBtn.setText("Sort (asc)");
+        }
         return observableMovies;
     }
-
-    public void doSortBtn(String text) {
-        if (sortBtn != null) {
-            sortBtn.setText(text);
-        }
-    }
-
-
-
 }
