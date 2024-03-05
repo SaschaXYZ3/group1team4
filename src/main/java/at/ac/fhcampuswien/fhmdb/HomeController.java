@@ -67,7 +67,6 @@ public class HomeController implements Initializable {
 
         });
 
-
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
             if (sortBtn.getText().equals("Sort (asc)")) {
@@ -80,25 +79,20 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
-
-
     }
 
+    //TODO correct filter
     public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
-
         ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie ->
                 samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie ->
                 samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
-
         return filteredMovies;
     }
 
     //TODO check if it works, no clue because visibility from genre doesn't works
     public static ObservableList<Movie> filteredListByGenre(ObservableList<Movie> movies, Genre genre) {
-
         ObservableList<Movie> moviesGenres = FXCollections.observableList(movies.stream().filter(samplemovie ->
                 samplemovie.getGenres().contains(genre)).collect(Collectors.toList()));
-
         return moviesGenres;
     }
 
@@ -111,7 +105,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    //comparator from movie with title
+    //comparator for movie with title
     Comparator<Movie> movieComp = Comparator.comparing(Movie::getTitle);
 
     public ObservableList<Movie> sortAscending(ObservableList<Movie> movies) {
