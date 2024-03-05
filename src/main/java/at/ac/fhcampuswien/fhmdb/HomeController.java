@@ -62,8 +62,8 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(ActionEvent -> {
             String txt = searchField.getText().toLowerCase();
 
-            filterMovies(allMovies, txt);
-
+            //filterMovies(allMovies, txt);
+            filteredListByString(observableMovies, searchField.getText());
 
         });
 
@@ -71,11 +71,11 @@ public class HomeController implements Initializable {
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
             if (sortBtn.getText().equals("Sort (asc)")) {
-                // TODO sort observableMovies ascending
+                //  sort observableMovies ascending
                 movieListView.setItems(sortAscending(movieListView.getItems()));
                 sortBtn.setText("Sort (desc)");
             } else {
-                // TODO sort observableMovies descending
+                //  sort observableMovies descending
                 movieListView.setItems(sortDescending(movieListView.getItems()));
                 sortBtn.setText("Sort (asc)");
             }
@@ -86,16 +86,20 @@ public class HomeController implements Initializable {
 
     public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
 
-        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
+        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie ->
+                samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie ->
+                samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
 
         return filteredMovies;
     }
 
-    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre) {
+    //TODO check if it works, no clue because visibility from genre doesn't works
+    public static ObservableList<Movie> filteredListByGenre(ObservableList<Movie> movies, Genre genre) {
 
-        List<Movie> MoviesGenres = movies.stream().filter(a -> Objects.equals(a.getGenres(), genre)).collect(Collectors.toList());
+        ObservableList<Movie> moviesGenres = FXCollections.observableList(movies.stream().filter(samplemovie ->
+                samplemovie.getGenres().contains(genre)).collect(Collectors.toList()));
 
-        return MoviesGenres;
+        return moviesGenres;
     }
 
     public static void filterMovies(List<Movie> movies, String txt) {
