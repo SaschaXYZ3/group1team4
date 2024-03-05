@@ -72,9 +72,11 @@ public class HomeController implements Initializable {
         sortBtn.setOnAction(actionEvent -> {
             if(sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
+                movieListView.setItems(sortAscending(movieListView.getItems()));
                 sortBtn.setText("Sort (desc)");
             } else {
                 // TODO sort observableMovies descending
+                movieListView.setItems(sortDescending(movieListView.getItems()));
                 sortBtn.setText("Sort (asc)");
             }
         });
@@ -106,4 +108,27 @@ public class HomeController implements Initializable {
             }
         }
     }
+
+    Comparator<Movie> movieComp = Comparator.comparing(Movie::getTitle);
+
+    public ObservableList<Movie> sortAscending(ObservableList<Movie> movies) {
+        movies.sort(movieComp);
+        doSortBtn("Sort (desc)");
+        return observableMovies;
+    }
+
+    public ObservableList<Movie> sortDescending(ObservableList<Movie> movies) {
+        movies.sort(movieComp.reversed());
+        doSortBtn("Sort (asc)");
+        return observableMovies;
+    }
+
+    public void doSortBtn(String text) {
+        if (sortBtn != null) {
+            sortBtn.setText(text);
+        }
+    }
+
+
+
 }
