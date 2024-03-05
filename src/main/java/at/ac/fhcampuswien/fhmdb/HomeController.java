@@ -62,7 +62,7 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(ActionEvent -> {
             String txt = searchField.getText().toLowerCase();
 
-                filterMovies(allMovies, txt);
+            filterMovies(allMovies, txt);
 
 
         });
@@ -70,7 +70,7 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
+            if (sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
                 movieListView.setItems(sortAscending(movieListView.getItems()));
                 sortBtn.setText("Sort (desc)");
@@ -83,27 +83,25 @@ public class HomeController implements Initializable {
 
 
     }
-    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord){
 
-        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream()
-                .filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase()))
-                .filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))
-                .collect(Collectors.toList()));
+    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
 
-        return  filteredMovies;
+        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
+
+        return filteredMovies;
     }
 
-    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
+    public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre) {
 
         List<Movie> MoviesGenres = movies.stream().filter(a -> Objects.equals(a.getGenres(), genre)).collect(Collectors.toList());
 
         return MoviesGenres;
     }
 
-    public static void filterMovies(List<Movie> movies, String txt){
+    public static void filterMovies(List<Movie> movies, String txt) {
         observableMovies.clear();
-        for (Movie movie : movies){
-            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)){
+        for (Movie movie : movies) {
+            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)) {
                 observableMovies.add(movie);
             }
         }
