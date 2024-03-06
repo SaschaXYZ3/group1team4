@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 import at.ac.fhcampuswien.fhmdb.Genre;
 
 public class Movie {
-    private String genres;
+    private List<Genre> genres;
     private String title;
     private String description;
     // TODO add more properties here
 
 
-    public Movie(String title, String description, String genres){
+    public Movie(String title, String description, List<Genre> genres){
         this.title = title;
         this.description = description;
         this.genres = genres;
@@ -28,13 +28,12 @@ public class Movie {
         return description;
     }
 
-    public String getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
     public void setDescription(String description) {
         this.description = description;
     }
-
     public static List<Movie> initializeMovies() {
         List<Movie> movies = new ArrayList<>();
                Movie movie1 = new Movie("Iron Man", "Flying Man in metal suit", "ADVENTURE");
