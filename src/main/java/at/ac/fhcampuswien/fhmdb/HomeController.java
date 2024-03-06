@@ -23,6 +23,9 @@ public class HomeController implements Initializable {
     public JFXButton searchBtn;
 
     @FXML
+    public JFXButton clearBtn;
+
+    @FXML
     public TextField searchField;
 
     @FXML
@@ -45,6 +48,7 @@ public class HomeController implements Initializable {
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
+        observableMovies.addAll(allMovies);         // add dummy data to observable list
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
@@ -60,20 +64,27 @@ public class HomeController implements Initializable {
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
         searchBtn.setOnAction(ActionEvent -> {
-            //String txt = searchField.getText().toLowerCase();
-            //filterMovies(allMovies, txt);
-            //filteredListByString(observableMovies, searchField.getText());
-            //TODO clear view first
-            if (!searchField.getText().isBlank()) {
-                setupMovieListView();
-                movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
-            }
+                    //String txt = searchField.getText().toLowerCase();
+                    //filterMovies(allMovies, txt);
+                    //filteredListByString(observableMovies, searchField.getText());
+                    //TODO clear view first
+                    if (!searchField.getText().isBlank()) {
+                        setupMovieListView();
+                        movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
+                    }
 
-            if (!genreComboBox.getSelectionModel().isEmpty()) {
-                movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
-            }
-
+                    if (!genreComboBox.getSelectionModel().isEmpty()) {
+                        movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
+                    }
+                });
+        clearBtn.setOnAction(actionEvent -> {
+            searchField.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.addAll(allMovies);
         });
+
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
@@ -117,13 +128,15 @@ public class HomeController implements Initializable {
         return moviesGenres;
     }
 
-    public static void filterMovies(List<Movie> movies, String txt) {
-        observableMovies.clear();
-        for (Movie movie : movies) {
-            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)) {
-                observableMovies.add(movie);
+    public List<Movie> filterMovies(List<Movie> movies, String txt){
+
+        List<Movie> movieList = new ArrayList<>();
+        for (Movie movie : movies){
+            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)){
+                movieList.add(movie);
             }
         }
+        return movieList;
     }
 
     //comparator for movie with title

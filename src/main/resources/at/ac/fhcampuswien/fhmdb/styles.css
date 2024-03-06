@@ -1,4 +1,7 @@
-
+.background-orange {
+    -fx-background-color: #FFA500;
+    -fx-cursor: hand;
+}
 .background-yellow {
     -fx-background-color: #f5c518;
 }
