@@ -60,10 +60,18 @@ public class HomeController implements Initializable {
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
         searchBtn.setOnAction(ActionEvent -> {
-            String txt = searchField.getText().toLowerCase();
-
+            //String txt = searchField.getText().toLowerCase();
             //filterMovies(allMovies, txt);
-            filteredListByString(observableMovies, searchField.getText());
+            //filteredListByString(observableMovies, searchField.getText());
+            //TODO clear view first
+            if (!searchField.getText().isBlank()) {
+                setupMovieListView();
+                movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
+            }
+
+            if (!genreComboBox.getSelectionModel().isEmpty()) {
+                movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
+            }
 
         });
 
@@ -82,11 +90,24 @@ public class HomeController implements Initializable {
     }
 
     //TODO correct filter
-    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
-        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie ->
-                samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie ->
-                samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
+    /*public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
+        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(sampleMovie ->
+                sampleMovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(sampleMovie ->
+                sampleMovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
         return filteredMovies;
+    }*/
+
+    public ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
+        String searchLower = searchWord.toLowerCase();
+
+        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(sampleMovie ->
+                        sampleMovie.getDescription().toLowerCase().contains(searchLower) || sampleMovie.getTitle()
+                                .toLowerCase().contains(searchLower)).collect(Collectors.toList()));
+        return filteredMovies;
+    }
+
+    private void setupMovieListView() {
+        movieListView.setCellFactory(movieListView -> new MovieCell());
     }
 
     //TODO check if it works, no clue because visibility from genre doesn't works
