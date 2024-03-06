@@ -7,20 +7,20 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
     public JFXButton searchBtn;
+
+    @FXML
+    public JFXButton clearBtn;
 
     @FXML
     public TextField searchField;
@@ -36,15 +36,16 @@ public class HomeController implements Initializable {
 
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    private static final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
+
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
+        observableMovies.addAll(allMovies);         // add dummy data to observable list
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
@@ -59,12 +60,25 @@ public class HomeController implements Initializable {
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
-        searchBtn.setOnAction(ActionEvent -> {
+        searchBtn.setOnAction(actionEvent -> {
             String txt = searchField.getText().toLowerCase();
 
-                filterMovies(allMovies, txt);
+            if (txt == null || txt.isEmpty()) {
+                return;
+            }
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.addAll(filterMovies(allMovies, txt));
 
+        });
 
+        clearBtn.setOnAction(actionEvent -> {
+            searchField.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.addAll(allMovies);
         });
 
 
@@ -81,15 +95,7 @@ public class HomeController implements Initializable {
 
 
     }
-    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord){
 
-        ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream()
-                .filter(samplemovie -> samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase()))
-                .filter(samplemovie -> samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))
-                .collect(Collectors.toList()));
-
-        return  filteredMovies;
-    }
 
     public static List<Movie> filteredListByGenre(List<Movie> movies, Genre genre){
 
@@ -98,12 +104,14 @@ public class HomeController implements Initializable {
         return MoviesGenres;
     }
 
-    public static void filterMovies(List<Movie> movies, String txt){
-        observableMovies.clear();
+    public List<Movie> filterMovies(List<Movie> movies, String txt){
+
+        List<Movie> movieList = new ArrayList<>();
         for (Movie movie : movies){
             if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)){
-                observableMovies.add(movie);
+                movieList.add(movie);
             }
         }
+        return movieList;
     }
 }
