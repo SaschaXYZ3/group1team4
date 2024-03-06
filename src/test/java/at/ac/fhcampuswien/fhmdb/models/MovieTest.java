@@ -40,6 +40,7 @@ class MovieTest {
                     new Movie("Iron Man 2", "Flying Man in metal suit", "ADVENTURE")
             );
 
+
         List<Movie> movies = new ArrayList<>();
         Movie movie1 = new Movie("Iron Man", "Flying Man in metal suit", "ADVENTURE");
         movies.add(movie1);
