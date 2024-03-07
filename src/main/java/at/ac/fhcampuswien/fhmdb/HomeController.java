@@ -99,8 +99,10 @@ public class HomeController implements Initializable {
         });
 
 
+    }
+
     //TODO correct filter
-    public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
+    public static ObservableList<Movie> filteredListByString (ObservableList < Movie > movies, String searchWord){
         ObservableList<Movie> filteredMovies = FXCollections.observableList(movies.stream().filter(samplemovie ->
                 samplemovie.getTitle().toLowerCase().contains(searchWord.toLowerCase())).filter(samplemovie ->
                 samplemovie.getDescription().toLowerCase().contains(searchWord.toLowerCase())).collect(Collectors.toList()));
@@ -108,17 +110,17 @@ public class HomeController implements Initializable {
     }
 
     //TODO check if it works, no clue because visibility from genre doesn't works
-    public static ObservableList<Movie> filteredListByGenre(ObservableList<Movie> movies, Genre genre) {
+    public static ObservableList<Movie> filteredListByGenre (ObservableList<Movie> movies, Genre genre){
         ObservableList<Movie> moviesGenres = FXCollections.observableList(movies.stream().filter(samplemovie ->
                 samplemovie.getGenres().contains(genre)).collect(Collectors.toList()));
         return moviesGenres;
     }
 
-    public List<Movie> filterMovies(List<Movie> movies, String txt){
+    public List<Movie> filterMovies (List<Movie> movies, String txt){
 
         List<Movie> movieList = new ArrayList<>();
-        for (Movie movie : movies){
-            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)){
+        for (Movie movie : movies) {
+            if (movie.getTitle().toLowerCase().contains(txt) || movie.getDescription().toLowerCase().contains(txt)) {
                 movieList.add(movie);
             }
         }
@@ -128,7 +130,7 @@ public class HomeController implements Initializable {
     //comparator for movie with title
     Comparator<Movie> movieComp = Comparator.comparing(Movie::getTitle);
 
-    public ObservableList<Movie> sortAscending(ObservableList<Movie> movies) {
+    public ObservableList<Movie> sortAscending (ObservableList < Movie > movies) {
         movies.sort(movieComp);
         // update sort button with text
         if (sortBtn != null) {
@@ -137,7 +139,7 @@ public class HomeController implements Initializable {
         return observableMovies;
     }
 
-    public ObservableList<Movie> sortDescending(ObservableList<Movie> movies) {
+    public ObservableList<Movie> sortDescending (ObservableList < Movie > movies) {
         movies.sort(movieComp.reversed());
         // update sort button with text
         if (sortBtn != null) {
