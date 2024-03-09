@@ -45,10 +45,28 @@ class HomeControllerTest {
     void sortDescending() {
         //TODO write min. one test case for sortDescending
         //given
+        HomeController homeController = new HomeController();
+        ObservableList<Movie> movies = FXCollections.observableArrayList();
+
+        Movie movie1 = new Movie("Iron Man 2", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE));
+        movies.add(movie1);
+        Movie movie2 = new Movie("Iron Man", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE));
+        movies.add(movie2);
+        Movie movie3 = new Movie("The Usual Suspects", "A sole survivor tells of the twisty events leading up to a horrific" +
+                "gun battle on a boat which begin when five criminals meet at seemingly random police lineup.",
+                Arrays.asList(Genre.ADVENTURE));
+        movies.add(movie3);
+        Movie movie4 = new Movie("Life Is Beautiful", "When an open-minded Jewish librarian and his son become victims of" +
+                "the Holocaust he uses a perfect mixture of will, humor, and imagination to protect his son" +
+                "from the dangers around their camp.", Arrays.asList(Genre.ADVENTURE));
+        movies.add(movie4);
 
         //when
+        homeController.sortDescending(movies);
 
         //then
+        assertTrue(movies.get(0).getTitle() == "The Usual Suspects");
+        assertTrue(movies.get(3).getTitle() == "Iron Man");
     }
 
     @Test
