@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import at.ac.fhcampuswien.fhmdb.Genre;
 
 public class Movie {
-    private List<Genre> genres;
+    private final List<Genre> genres;
     private String title;
     private String description;
     // TODO add more properties here
@@ -31,6 +31,7 @@ public class Movie {
     public List<Genre> getGenres() {
         return genres;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -61,8 +62,20 @@ public class Movie {
                         "govemrnent.", Arrays.asList(Genre.ADVENTURE));
                 movies.add(movie7);
                 return movies;
+    }
+
+    //FIX Genre to String
+    public String genreToString(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(Genre genre : getGenres()){
+            stringBuilder.append(genre.toString());
+            stringBuilder.append(" ");
         }
 
+        return stringBuilder.toString();
+    }
 
 
 }

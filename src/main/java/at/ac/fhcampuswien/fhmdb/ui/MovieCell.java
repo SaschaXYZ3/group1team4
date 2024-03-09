@@ -29,14 +29,23 @@ public class MovieCell extends ListCell<Movie> {
                             ? movie.getDescription()
                             : "No description available"
             );
-            genre.setText(movie.getGenres().toString());
+            //genre.setText(movie.getGenres().toString());
+            //Changed with example above
+            genre.setText(
+                    (movie.getGenres() != null)
+                            ? movie.genreToString().toUpperCase()
+                            : " "
+            );
 
+
+            //genre.setText(movie.getGenresAsString());
 
             // color scheme
             title.getStyleClass().add("text-yellow");
             detail.getStyleClass().add("text-white");
             genre.getStyleClass().add("text-white");
             genre.setStyle("-fx-font-style: italic");
+            //genre.getStyleClass().add("text-italic");
             layout.setBackground(new Background(new BackgroundFill(Color.web("#454545"), null, null)));
 
             // layout
