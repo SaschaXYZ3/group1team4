@@ -64,19 +64,28 @@ public class HomeController implements Initializable {
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
         searchBtn.setOnAction(ActionEvent -> {
-                    //String txt = searchField.getText().toLowerCase();
-                    //filterMovies(allMovies, txt);
-                    //filteredListByString(observableMovies, searchField.getText());
-                    //TODO clear view first
-                    if (!searchField.getText().isBlank()) {
-                        setupMovieListView();
-                        movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
-                    }
+            /*
+            String txt = searchField.getText().toLowerCase();
 
-                    if (!genreComboBox.getSelectionModel().isEmpty()) {
-                        movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
-                    }
-                });
+            if (txt == null || txt.isEmpty()) {
+                return;
+            }
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.addAll(filterMovies(allMovies, txt));
+            */
+            if (!searchField.getText().isBlank()) {
+                setupMovieListView();
+                movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
+            }
+
+            if (!genreComboBox.getSelectionModel().isEmpty()) {
+                movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
+            }
+        });
+        });
+
         clearBtn.setOnAction(actionEvent -> {
             searchField.clear();
             movieListView.setCellFactory(movieListView -> new MovieCell());
@@ -98,7 +107,7 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
-    }
+
 
     //TODO correct filter
     /*public static ObservableList<Movie> filteredListByString(ObservableList<Movie> movies, String searchWord) {
