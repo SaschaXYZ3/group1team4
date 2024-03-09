@@ -43,7 +43,6 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
@@ -98,6 +97,7 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
+
             if (sortBtn.getText().equals("Sort (asc)")) {
                 //  sort observableMovies ascending
                 movieListView.setItems(sortAscending(movieListView.getItems()));

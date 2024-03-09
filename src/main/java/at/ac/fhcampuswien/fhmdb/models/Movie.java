@@ -36,7 +36,7 @@ public class Movie {
     }
     public static List<Movie> initializeMovies() {
         List<Movie> movies = new ArrayList<>();
-                Movie movie1 = new Movie("Iron Man", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE));
+                Movie movie1 = new Movie("Iron Man", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE, Genre.COMEDY));
                 movies.add(movie1);
                 Movie movie2 = new Movie("Iron Man 2", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE));
                 movies.add(movie2);
