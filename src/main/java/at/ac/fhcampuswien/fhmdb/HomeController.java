@@ -64,6 +64,11 @@ public class HomeController implements Initializable {
         // either set event handlers in the fxml file (onAction) or add them here
 
         searchBtn.setOnAction(ActionEvent -> {
+
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.clear();
+            movieListView.setCellFactory(movieListView -> new MovieCell());
+            observableMovies.addAll(allMovies);
             /*
             String txt = searchField.getText().toLowerCase();
 
