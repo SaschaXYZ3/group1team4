@@ -69,7 +69,7 @@ public class HomeController implements Initializable {
             observableMovies.clear();
             movieListView.setCellFactory(movieListView -> new MovieCell());
             observableMovies.addAll(allMovies);
-            /*
+
             String txt = searchField.getText().toLowerCase();
 
             if (txt == null || txt.isEmpty()) {
@@ -79,7 +79,8 @@ public class HomeController implements Initializable {
             observableMovies.clear();
             movieListView.setCellFactory(movieListView -> new MovieCell());
             observableMovies.addAll(filterMovies(allMovies, txt));
-            /*
+
+
             if (!searchField.getText().isBlank()) {
                 setupMovieListView();
                 movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
