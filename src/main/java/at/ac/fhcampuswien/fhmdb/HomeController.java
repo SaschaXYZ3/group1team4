@@ -54,6 +54,7 @@ public class HomeController implements Initializable {
         genreComboBox.getItems().addAll(Genre.values());
         //genreComboBox.setItems(FXCollections.observableArrayList(Genre.values()));
         //movieListView.setItems(Movie.filteredListByGenre(observableMovies,genreComboBox.getValue());
+
         genreComboBox.setOnAction(event -> {
             movieListView.setItems((ObservableList) filteredListByGenre(observableMovies, (Genre) genreComboBox.getValue()));
 
@@ -80,24 +81,20 @@ public class HomeController implements Initializable {
             movieListView.setCellFactory(movieListView -> new MovieCell());
             observableMovies.addAll(filterMovies(allMovies, txt));
 
-
-            if (!searchField.getText().isBlank()) {
-                setupMovieListView();
-                movieListView.setItems(filteredListByString(observableMovies, searchField.getText()));
-            }
-
             if (!genreComboBox.getSelectionModel().isEmpty()) {
                 movieListView.setItems(filteredListByGenre(observableMovies, Genre.valueOf(genreComboBox.getValue().toString())));
             }
         });
 
 
-        clearBtn.setOnAction(actionEvent -> {
+        clearBtn.setOnAction(event -> {
             searchField.clear();
             movieListView.setCellFactory(movieListView -> new MovieCell());
             observableMovies.clear();
             movieListView.setCellFactory(movieListView -> new MovieCell());
             observableMovies.addAll(allMovies);
+
+            genreComboBox.setValue(null);
         });
 
 
@@ -138,9 +135,12 @@ public class HomeController implements Initializable {
     }
 
     //TODO check if it works, no clue because visibility from genre doesn't works
-    public static ObservableList<Movie> filteredListByGenre(ObservableList<Movie> movies, Genre genre) {
+    public ObservableList<Movie> filteredListByGenre(ObservableList<Movie> movies, Genre genre) {
         ObservableList<Movie> moviesGenres = FXCollections.observableList(movies.stream().filter(samplemovie ->
                 samplemovie.getGenres().contains(genre)).collect(Collectors.toList()));
+        if (genre == null){
+            moviesGenres = observableMovies;
+        }
         return moviesGenres;
     }
 

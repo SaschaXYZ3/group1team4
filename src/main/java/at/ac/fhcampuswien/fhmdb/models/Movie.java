@@ -43,7 +43,7 @@ public class Movie {
                 movies.add(movie2);
                 Movie movie3 = new Movie("Life Is Beautiful", "When an open-minded Jewish librarian and his son become victims of" +
                         "the Holocaust he uses a perfect mixture of will, humor, and imagination to protect his son" +
-                        "from the dangers around their camp.", Arrays.asList(Genre.ADVENTURE));
+                        "from the dangers around their camp.", Arrays.asList(Genre.ADVENTURE, Genre.DOCUMENTARY));
                 movies.add(movie3);
                 Movie movie4 = new Movie("The Usual Suspects", "A sole survivor tells of the twisty events leading up to a horrific" +
                         "gun battle on a boat which begin when five criminals meet at seemingly random police lineup.",
