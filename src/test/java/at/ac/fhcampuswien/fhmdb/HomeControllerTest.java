@@ -86,10 +86,12 @@ class HomeControllerTest {
                 Arrays.asList(Genre.CRIME, Genre.DRAMA, Genre.MYSTERY));
         movies.add(movie4);
         //when
-        homeController.filteredListByString(movies, "iron");
+
+        ObservableList<Movie> filteredList = homeController.filteredListByString(movies, "iron");
         //then
-        assertTrue(movies.contains(movie1));
-        assertTrue(movies.contains(movie2));
+        assertTrue(filteredList.contains(movie1));
+        assertTrue(filteredList.contains(movie2));
+       // assertTrue(filteredList.contains(movie3)); --> false Test if used
 
     }
 
