@@ -1,16 +1,15 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import at.ac.fhcampuswien.fhmdb.Genre;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Movie {
     private final List<Genre> genres;
     private String title;
     private String description;
-    // TODO add more properties here
-
 
     public Movie(String title, String description, List<Genre> genres){
         this.title = title;
@@ -50,16 +49,16 @@ public class Movie {
                         Arrays.asList(Genre.CRIME, Genre.DRAMA, Genre.MYSTERY));
                 movies.add(movie4);
                 Movie movie5 = new Movie("Puss in Boots", "An outlaw cat his childhood egg-friend, and a seductive thief kitty set out in " +
-                        "seych for the eggs of the fabled Colden Goose to clear his name, restore his lost" +
-                        "honore and regain the trust of his mother and town.", Arrays.asList(Genre.COMEDY, Genre.FAMILY, Genre.ANIMATION));
+                        "search for the eggs of the fabled Golden Goose to clear his name, restore his lost" +
+                        "honor and regain the trust of his mother and town.", Arrays.asList(Genre.COMEDY, Genre.FAMILY, Genre.ANIMATION));
                 movies.add(movie5);
                 Movie movie6 = new Movie("Avatar", "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn " +
-                        "beüeen following his orders and protecting the world he feels is his" +
+                        "between following his orders and protecting the world he feels is his" +
                         "home.", Arrays.asList(Genre.ANIMATION, Genre.DRAMA, Genre.ACTION));
                 movies.add(movie6);
                 Movie movie7 = new Movie("The Wolf of Wall Street", "Based on the true Story of Jordan Belfort from his rise ö wealthy " +
                         "stock-broker living the high life to his fall involving crime, corruption and the federal" +
-                        "govemrnent.", Arrays.asList(Genre.DRAMA, Genre.ROMANCE, Genre.BIOGRAPHY));
+                        "government.", Arrays.asList(Genre.DRAMA, Genre.ROMANCE, Genre.BIOGRAPHY));
                 movies.add(movie7);
                 return movies;
     }
@@ -76,6 +75,5 @@ public class Movie {
 
         return stringBuilder.toString();
     }
-
 
 }
