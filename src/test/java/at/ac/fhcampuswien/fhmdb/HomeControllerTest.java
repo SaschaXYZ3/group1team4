@@ -5,11 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HomeControllerTest {
 
@@ -70,14 +68,29 @@ class HomeControllerTest {
     }
 
     @Test
-    void filteredListByString() {
+    void filteredListByString_iron() {
         //TODO write min. one test case for filteredListByString
         //given
-
+        HomeController homeController = new HomeController();
+        ObservableList<Movie> movies = FXCollections.observableArrayList();
+        Movie movie1 = new Movie("Iron Man", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE, Genre.COMEDY));
+        movies.add(movie1);
+        Movie movie2 = new Movie("Iron Man 2", "Flying Man in metal suit", Arrays.asList(Genre.ADVENTURE));
+        movies.add(movie2);
+        Movie movie3 = new Movie("Life Is Beautiful", "When an open-minded Jewish librarian and his son become victims of" +
+                "the Holocaust he uses a perfect mixture of will, humor, and imagination to protect his son" +
+                "from the dangers around their camp.", Arrays.asList(Genre.DRAMA, Genre.ROMANCE));
+        movies.add(movie3);
+        Movie movie4 = new Movie("The Usual Suspects", "A sole survivor tells of the twisty events leading up to a horrific" +
+                "gun battle on a boat which begin when five criminals meet at seemingly random police lineup.",
+                Arrays.asList(Genre.CRIME, Genre.DRAMA, Genre.MYSTERY));
+        movies.add(movie4);
         //when
-
+        homeController.filteredListByString(movies, "iron");
         //then
-        assertTrue(false);
+        assertTrue(movies.contains(movie1));
+        assertTrue(movies.contains(movie2));
+
     }
 
     @Test
