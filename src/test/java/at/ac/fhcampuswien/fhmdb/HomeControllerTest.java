@@ -77,6 +77,7 @@ class HomeControllerTest {
         //when
 
         //then
+        assertTrue(false);
     }
 
     @Test

@@ -57,7 +57,7 @@ public class Movie {
                         "beüeen following his orders and protecting the world he feels is his" +
                         "home.", Arrays.asList(Genre.ANIMATION, Genre.DRAMA, Genre.ACTION));
                 movies.add(movie6);
-                Movie movie7 = new Movie("The Wolf of Wall Street", "Based on the frue Story of Jordan Belfort from his rise ö wealthy " +
+                Movie movie7 = new Movie("The Wolf of Wall Street", "Based on the true Story of Jordan Belfort from his rise ö wealthy " +
                         "stock-broker living the high life to his fall involving crime, corruption and the federal" +
                         "govemrnent.", Arrays.asList(Genre.DRAMA, Genre.ROMANCE, Genre.BIOGRAPHY));
                 movies.add(movie7);
