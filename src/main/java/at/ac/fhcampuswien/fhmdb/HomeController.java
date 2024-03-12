@@ -68,6 +68,8 @@ public class HomeController implements Initializable {
 
             } else if (txt.isEmpty() && genreComboBox.getSelectionModel().isEmpty()){
                 observableMovies.addAll(allMovies);
+            } else if(!txt.isEmpty() && genreComboBox.getSelectionModel().isEmpty()){
+                movieListView.setItems(filteredListByString(observableMovies, txt));
             }
         });
 
@@ -138,7 +140,7 @@ public class HomeController implements Initializable {
         if (sortBtn != null) {
             sortBtn.setText("Sort (desc)");
         }
-        return observableMovies;
+        return movies;
     }
 
     public ObservableList<Movie> sortDescending(ObservableList<Movie> movies) {
@@ -147,6 +149,6 @@ public class HomeController implements Initializable {
         if (sortBtn != null) {
             sortBtn.setText("Sort (asc)");
         }
-        return observableMovies;
+        return movies;
     }
 }

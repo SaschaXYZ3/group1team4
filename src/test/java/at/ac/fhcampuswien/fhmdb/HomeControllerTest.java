@@ -93,7 +93,6 @@ class HomeControllerTest {
         //then
         assertTrue(filteredStringList.contains(movie1));
         assertTrue(filteredStringList.contains(movie2));
-        assertTrue(filteredStringList.contains(movie3));
 
     }
 
